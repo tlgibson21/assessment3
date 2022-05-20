@@ -33,7 +33,7 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 ## Gene expression
 
-This is my introduction to analysying gene expression.
+This is my introduction to analysing gene expression.
 
 ```{r pip}
 # Read in data file
@@ -48,7 +48,7 @@ head(pip)
 
 ## Growth data
 
-This is my introduction to analysying of growth data.
+This is my introduction to analysing of growth data.
 
 ```{r mychunk}
 # Read in data file
