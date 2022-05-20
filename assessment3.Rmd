@@ -2,7 +2,9 @@
 title: "assessment3"
 author: "Lahirunee Rupasinghe & Tayla Gibson"
 date: '2022-05-13'
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -29,15 +31,15 @@ plot(pressure)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-## Read in Data File
+## Gene expression
 
-1. Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes.
+This is my introduction to analysying gene expression.
 
-```{r gene_expression}
+```{r pip}
+# Read in data file
+
 URL="https://raw.githubusercontent.com/markziemann/SLE712_files/master/assessment_task3/bioinfo_asst3_part1_files/gene_expression.tsv"
 
 pip <- read.table(URL,header = TRUE,row.names = 1)
 pip
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
