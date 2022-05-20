@@ -41,5 +41,13 @@ This is my introduction to analysying gene expression.
 URL="https://raw.githubusercontent.com/markziemann/SLE712_files/master/assessment_task3/bioinfo_asst3_part1_files/gene_expression.tsv"
 
 pip <- read.table(URL,header = TRUE,row.names = 1)
-pip
+
+head(pip)
 ```
+=======
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Lahi was here
+>>>>>>> 80ed7e6c3923f02843cb0f6011eebcc83edffea2
