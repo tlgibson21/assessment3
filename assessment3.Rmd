@@ -44,6 +44,26 @@ pip <- read.table(URL,header = TRUE,row.names = 1)
 
 head(pip)
 ```
+
+
+## Growth data
+
+This is my introduction to analysying of growth data.
+
+```{r mychunk}
+# Read in data file
+
+URL="https://github.com/markziemann/SLE712_files/blob/master/assessment_task3/bioinfo_asst3_part1_files/growth_data.csv"
+growth <- read.table(URL,sep=",")
+growth
+str(growth)
+growth <- read.table(URL,sep=",",header=TRUE)
+growth
+str(growth)
+growth <- read.csv(URL)
+growth
+head(growth)
+```
 =======
 ```
 
