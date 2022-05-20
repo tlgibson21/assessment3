@@ -50,8 +50,4 @@ head(pip)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 # Lahi was here
-<<<<<<< HEAD
 
-=======
->>>>>>> 80ed7e6c3923f02843cb0f6011eebcc83edffea2
->>>>>>> 527deacdd00d861ecf01f0faccbbd8c84716f400
