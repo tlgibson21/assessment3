@@ -1,0 +1,108 @@
+---
+title: "part1"
+author: "Lahirunee Rupasinghe & Tayla Gibson"
+date: '2022-05-27'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r library, echo=FALSE}
+library("seqinr")
+library("kableExtra")
+library("R.utils")
+```
+
+## Section 1: Gene expression
+
+This is my introduction to analysing gene expression.
+
+1. Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes.
+
+```{r gene_exp}
+# Read in data file
+
+URL="https://raw.githubusercontent.com/markziemann/SLE712_files/master/assessment_task3/bioinfo_asst3_part1_files/gene_expression.tsv"
+
+gene_exp <- read.table(URL, header=TRUE, row.names=1)
+
+dt1 <- head(gene_exp)
+
+dt1 %>%
+  kbl() %>%
+  kable_styling()
+```
+
+2. Make a new column which is the mean of the other columns. Show a table of values for the first six genes.
+
+```{r mean}
+# Create a new column
+
+gene_exp$Mean <- apply(gene_exp, 1, mean)
+
+dt2 <- head(gene_exp)
+
+dt2 %>%
+  kbl() %>%
+  kable_styling()
+```
+
+3. List the 10 genes with the highest mean expression
+
+```{r ten}
+# List 10
+
+sorted <- gene_exp[order(-gene_exp$Mean),]
+
+list <- head(sorted, 10)
+
+dt3 <- rownames(list)
+
+dt3 %>%
+  kbl() %>%
+  kable_styling()
+```
+
+4. Determine the number of genes with a mean < 10
+
+```{r below}
+# Mean less than 10
+
+lessthan <- subset(gene_exp,Mean < 10)
+
+nrow(lessthan)
+```
+
+5. Make a histogram plot of the mean values and include it into your report
+
+```{r hist}
+# Plot a histogram
+
+hist(gene_exp$Mean, xlab="Mean",
+     main="Histogram of Mean Values")
+```
+
+
+
