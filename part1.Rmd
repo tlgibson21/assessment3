@@ -104,5 +104,21 @@ hist(gene_exp$Mean, xlab="Mean",
      main="Histogram of Mean Values")
 ```
 
+## Section 2: Growth data
 
+This is my introduction to analysing growth data.
 
+```{r mychunk}
+# Read in data file
+
+URL="https://raw.githubusercontent.com/markziemann/SLE712_files/master/assessment_task3/bioinfo_asst3_part1_files/growth_data.csv"
+growth <- read.table(URL,sep=",")
+growth
+str(growth)
+growth <- read.table(URL,sep=",",header=TRUE)
+growth
+str(growth)
+growth <- read.csv(URL)
+growth
+head(growth)
+```
