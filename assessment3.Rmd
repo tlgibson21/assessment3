@@ -4,7 +4,6 @@ author: "Lahirunee Rupasinghe & Tayla Gibson"
 date: '2022-05-13'
 output:
   html_document: default
-  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
