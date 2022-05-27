@@ -1,0 +1,58 @@
+---
+title: "part2"
+author: "Lahirunee Rupasinghe & Tayla Gibson"
+date: '2022-05-27'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Part 2: Examining Biological Sequence Diversity
+
+Comparing E. coli to Mycoplasma hyopneumoniae str. Mycoplasma hyopneumoniae.
+
+```{r sequence data}
+# Loading sequence data
+
+library("seqinr")
+library("kableExtra")
+library("R.utils")
+
+URL="http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cdna/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cdna.all.fa.gz"
+download.file(URL,destfile="ecoli_cds.fa.gz")
+gunzip("ecoli_cds.fa.gz")
+list.files()
+
+cds <- seqinr::read.fasta("ecoli_cds.fa")
+str(head(cds))
+
+URL="http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_40_collection/mycoplasma_hyopneumoniae_gca_004768725/cdna/Mycoplasma_hyopneumoniae_gca_004768725.ASM476872v1.cdna.all.fa.gz"
+download.file(URL,destfile="mhp_cds.fa.gz")
+gunzip("mhp_cds.fa.gz")
+list.files()
+
+cds <- seqinr::read.fasta("mhp_cds.fa")
+str(head(cds))
+```
