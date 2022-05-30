@@ -108,17 +108,10 @@ hist(gene_exp$Mean, xlab="Mean",
 
 This is my introduction to analysing growth data.
 
-```{r mychunk}
-## Part 1: Growth data
-
-
-
-# Read in data file
-
+```{r growth}
 ## GROWTH DATA FILE
 
 ### How to download file
-
 
 download.file(url = "https://raw.githubusercontent.com/markziemann/SLE712_files/master/assessment_task3/bioinfo_asst3_part1_files/growth_data.csv", 
               destfile = "growth_data.csv")
@@ -148,6 +141,54 @@ head(d_cs)
 d_ts <- d[d$Site=="treatmentsite", ]
 head(d_ts)
 
+# New code to calculate mean and standard deviation
+
+# Subset each site
+
+site1 <- subset(d,Site == "northeast")
+
+site2 <- subset(d,Site == "southwest")
+
+# Mean and standard deviation at the 
+# start of the study at the
+# first site 'northeast'
+
+start_site1 <- site1$Circumf_2005_cm
+
+mean(start_site1)
+
+sd(start_site1)
+
+# Mean and standard deviation at the 
+# end of the study at the
+# first site 'northeast'
+
+end_site1 <- site1$Circumf_2020_cm
+
+mean(end_site1)
+
+sd(end_site1)
+
+# Mean and standard deviation at the 
+# start of the study at the
+# second site 'southwest'
+
+start_site2 <- site2$Circumf_2005_cm
+
+mean(start_site2)
+
+sd(start_site2)
+
+# Mean and standard deviation at the 
+# end of the study at the
+# second site 'southwest'
+
+end_site2 <- site2$Circumf_2020_cm
+
+mean(end_site2)
+
+sd(end_site2)
+
 #### To calculate standard deviation
 ##### To calculate standard deviation for Site=="treatmentsite" 
 ts<-list()
@@ -172,5 +213,12 @@ head(ts)
 cs <- subset(d, Site=="controlsite")
 head(cs)
 
-```
+# New code for boxplot
+
+boxplot(site1$Circumf_2005_cm,site1$Circumf_2020_cm,
+        site2$Circumf_2005_cm,site2$Circumf_2020_cm,
+        names=c("2005 at NE site","2020 at NE site",
+                "2005 at SW site","2020 at SW site"),
+        main="Tree Circumference at the Start and End of the study at Both Sites",
+        ylab="Tree Circumference (cm)")
 ```
