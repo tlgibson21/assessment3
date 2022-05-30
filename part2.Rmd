@@ -31,28 +31,227 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 ## Part 2: Examining Biological Sequence Diversity
 
-Comparing E. coli to Mycoplasma hyopneumoniae str. Mycoplasma hyopneumoniae.
+Comparing *Escherichia coli* to *Mycoplasma hyopneumoniae*.
 
-```{r sequence data}
-# Loading sequence data
+**1. Download the whole set of coding DNA sequences for *E. coli* and your organism of interest *M. hyopneumoniae*.**
 
+```{r packages}
+suppressPackageStartupMessages({
 library("seqinr")
 library("kableExtra")
 library("R.utils")
+})
+```
 
-URL="http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cdna/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cdna.all.fa.gz"
+#### Download *E. coli* coding DNA sequence
+
+To download the whole set of coding DNA sequence for *E.coli*, I visited the website...
+
+```{r e.coli sequence data}
+URL="http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
+
 download.file(URL,destfile="ecoli_cds.fa.gz")
+
 gunzip("ecoli_cds.fa.gz")
+
 list.files()
 
-cds <- seqinr::read.fasta("ecoli_cds.fa")
-str(head(cds))
+ecoli <- seqinr::read.fasta("ecoli_cds.fa")
 
+str(head(ecoli))
+```
+
+#### Download *M. hyopneumoniae* coding DNA sequence
+
+```{r m. hyopneumoniae sequence data}
 URL="http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_40_collection/mycoplasma_hyopneumoniae_gca_004768725/cdna/Mycoplasma_hyopneumoniae_gca_004768725.ASM476872v1.cdna.all.fa.gz"
+
 download.file(URL,destfile="mhp_cds.fa.gz")
+
 gunzip("mhp_cds.fa.gz")
+
 list.files()
 
-cds <- seqinr::read.fasta("mhp_cds.fa")
-str(head(cds))
+mhp <- seqinr::read.fasta("mhp_cds.fa")
+
+str(head(mhp))
+```
+
+**1. How many coding sequences are present in these organisms?**
+
+The number of coding sequences present in *E.coli*.
+
+```{r e.coli cds}
+length(ecoli)
+```
+
+The number of coding sequences present in *M. hyopneumoniae*.
+
+```{r mhp cds}
+length(mhp)
+```
+
+**1. How much coding DNA is there in total for these two organisms?**
+
+The amount of coding DNA in total for *E.coli*.
+
+```{r e.coli cdna}
+sum(sapply(ecoli[1:3],length))
+```
+
+The amount of coding DNA in total for *M. hyopneumoniae*.
+
+```{r mhp cdna}
+sum(sapply(mhp[1:3],length))
+```
+
+**1. Describe any differences between the two organisms.**
+
+*E.coli* has a greater
+
+**2. Calculate the length of all coding sequences in these two organisms.**
+
+The total sequence length for *E.coli*.
+
+```{r e.coli cds len}
+cds_ecoli <- as.numeric( summary(ecoli)[,1] )
+
+sum(cds_ecoli)
+```
+
+The total sequence length for *M. hyopneumoniae*.
+
+```{r mhp cds len}
+cds_mhp <- as.numeric( summary(mhp)[,1] )
+
+sum(cds_mhp)
+```
+
+**2. Make a boxplot of coding sequence length in these organisms.**
+
+Define variables for each organism.
+
+```{r define}
+len_ecoli <- sum(cds_ecoli)
+len_mhp <- sum(cds_mhp)
+```
+
+Create a boxplot.
+
+```{r boxplot}
+boxplot(len_ecoli,len_mhp,names = c("Ecoli Coding Sequence Length","Mhp Coding Sequence Length"),
+        ylab="Sequence Length (bp)")
+```
+
+**2. What is the mean and median coding sequence length of these two organisms?**
+
+The mean and median total sequence length for *E.coli*.
+
+```{r e.coli mean median}
+mean(cds_ecoli)
+median(cds_ecoli)
+```
+
+The mean and median total sequence length for *M. hyopneumoniae*.
+
+```{r mhp mean median}
+mean(cds_mhp)
+median(cds_mhp)
+```
+
+**2. Describe any differences between the two organisms.**
+
+*E.coli* has a greater
+
+**3. Calculate the frequency of DNA bases in the total coding sequences for both organisms.**
+
+The frequency of DNA bases for *E.coli*.
+
+```{r e.coli dna freq}
+dna_ecoli <- unlist(ecoli)
+count(dna_ecoli, wordsize = 1)
+```
+
+The frequency of DNA bases for *M. hyopneumoniae*.
+
+```{r mhp dna freq}
+dna_mhp <- unlist(mhp)
+count(dna_mhp, wordsize = 1)
+```
+
+**3. Perform the same calculation for the total protein sequence.**
+
+The frequency of protein for *E.coli*.
+
+```{r e.coli protein}
+translate(ecoli[[1]])
+
+prot_ecoli <- lapply(X = ecoli,FUN = translate)
+
+prot_ecoli[[1]]
+
+aa_e <- unique(prot_ecoli[[2]])
+
+aa_e <- aa_e[aa_e != "*"]
+
+prot_seq_ecoli <- unlist(prot_ecoli)
+
+count(prot_seq_ecoli, alphabet = aa_e,wordsize = 1)
+```
+
+The frequency of protein for *M. hyopneumoniae*.
+
+```{r mhp protein}
+translate(mhp[[1]])
+
+prot_mhp <- lapply(X = mhp,FUN = translate)
+
+prot_mhp[[1]]
+
+aa_m <- unique(prot_mhp[[2]])
+
+aa_m <- aa_m[aa_m != "*"]
+
+prot_seq_mhp <- unlist(prot_mhp)
+
+count(prot_seq_mhp, alphabet = aa_m,wordsize = 1)
+```
+
+**3. Create bar plots for nucleotide and amino acid frequency.**
+
+Define variables for each organism.
+
+```{r define dna protein}
+dna_freq_ecoli <- count(dna_ecoli, wordsize = 1)
+prot_total_seq_ecoli <- count(prot_seq_ecoli, alphabet = aa_e,wordsize = 1)
+dna_freq_mhp <- count(dna_mhp, wordsize = 1)
+prot_total_seq_mhp <- count(prot_seq_mhp, alphabet = aa_m,wordsize = 1)
+```
+
+Create a bar plot for nucleotide frequency of *E.coli*.
+
+```{r e.coli dna bar}
+barplot(dna_freq_ecoli, xlab="Nucleotides", 
+        ylab="Frequency", main="E.coli CDS composition")
+```
+
+Create a bar plot for amino acid frequency of *E.coli*.
+
+```{r mhp dna bar}
+barplot(prot_total_seq_ecoli, xlab="Amino Acids", 
+        ylab="Frequency", main="E.coli CDS composition")
+```
+
+Create a bar plot for nucleotide frequency of *M. hyopneumoniae*.
+
+```{r e.coli protein bar}
+barplot(dna_freq_mhp, xlab="Nucleotides", 
+        ylab="Frequency", main="M. hyopneumoniae CDS composition")
+```
+
+Create a bar plot for amino acid frequency of *M. hyopneumoniae*.
+
+```{r mhp protein bar}
+barplot(prot_total_seq_mhp, xlab="Amino Acids", 
+        ylab="Frequency", main="M. hyopneumoniae CDS composition")
 ```
