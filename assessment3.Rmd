@@ -71,47 +71,37 @@ d <- read.csv("growth_data.csv", stringsAsFactors = FALSE, header = TRUE)
 head(d)
 str(d)
 
-
 ###Question 6
 
 #### To find column names
 colnames(d, do.NULL = TRUE, prefix = "col")
 
-
-
 ### Question 7 
 
 #### To calculate mean
-##### To do row-wise subsetting for Site=="southwest"
-d_sw <- d[d$Site=="southwest", ]
-head(d_sw)
-##### To do row-wise subsetting for Site=="northeast"
-d_ne <- d[d$Site=="northeast", ]
-head(d_ne)
+##### To do row-wise subsetting for Site=="controlsite"
+d_cs <- d[d$Site=="controlsite", ]
+head(d_cs)
+##### To do row-wise subsetting for Site=="treatmentsite"
+d_ts <- d[d$Site=="treatmentsite", ]
+head(d_ts)
 
 #### To calculate standard deviation
-##### To calculate standard deviation for Site=="northeast" 
-ne<-list()
-ne$mean<-colMeans(d_ne[,c(3,6)])
-ne$std<- c(sd(d_ne[,3]), sd(d_ne[,6]))
-##### To present standard deviation for Site=="northeast"  
-ne <- as.data.frame(ne)
-head(ne)
-##### To calculate standard deviation for Site=="southwest"
-sw<-list()
-sw$mean<-colMeans(d_sw[,c(3,6)])
-sw$sd<- c(sd(d_sw[,3]), sd(d_sw[,6]))
-##### To present standard deviation for Site=="southwest" 
-sw <- as.data.frame(sw);
-head(sw)
+##### To calculate standard deviation for Site=="treatmentsite" 
+ts<-list()
+ts$mean<-colMeans(d_ts[,c(3,6)])
+ts$std<- c(sd(d_ts[,3]), sd(d_ts[,6]))
+##### To present standard deviation for Site=="treatmentsite"  
+ts <- as.data.frame(ts)
+head(ts)
+##### To calculate standard deviation for Site=="controlsite"
+cs<-list()
+cs$mean<-colMeans(d_cs[,c(3,6)])
+cs$sd<- c(sd(d_cs[,3]), sd(d_cs[,6]))
+##### To present standard deviation for Site=="controlsite" 
+cs <- as.data.frame(cs);
+head(cs)
 
-### Question 8
-
-#### Making a boxplot
-ne <- subset(d, Site=="northeast")
-head(ne)
-sw <- subset(d, Site=="southwest")
-head(sw)
 ```
 
 
