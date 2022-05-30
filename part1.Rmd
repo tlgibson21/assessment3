@@ -109,16 +109,68 @@ hist(gene_exp$Mean, xlab="Mean",
 This is my introduction to analysing growth data.
 
 ```{r mychunk}
+## Part 1: Growth data
+
+
+
 # Read in data file
 
-URL="https://raw.githubusercontent.com/markziemann/SLE712_files/master/assessment_task3/bioinfo_asst3_part1_files/growth_data.csv"
-growth <- read.table(URL,sep=",")
-growth
-str(growth)
-growth <- read.table(URL,sep=",",header=TRUE)
-growth
-str(growth)
-growth <- read.csv(URL)
-growth
-head(growth)
+## GROWTH DATA FILE
+
+### How to download file
+
+
+download.file(url = "https://raw.githubusercontent.com/markziemann/SLE712_files/master/assessment_task3/bioinfo_asst3_part1_files/growth_data.csv", 
+              destfile = "growth_data.csv")
+
+### Reading file into RSTudio
+d <- read.csv("growth_data.csv")
+head(d)
+### To check structure of data 
+str(d)
+### To deactivate the default setting of recognising strings as factors and remove extra headings
+d <- read.csv("growth_data.csv", stringsAsFactors = FALSE, header = TRUE)
+head(d)
+str(d)
+
+###Question 6
+
+#### To find column names
+colnames(d, do.NULL = TRUE, prefix = "col")
+
+### Question 7 
+
+#### To calculate mean
+##### To do row-wise subsetting for Site=="controlsite"
+d_cs <- d[d$Site=="controlsite", ]
+head(d_cs)
+##### To do row-wise subsetting for Site=="treatmentsite"
+d_ts <- d[d$Site=="treatmentsite", ]
+head(d_ts)
+
+#### To calculate standard deviation
+##### To calculate standard deviation for Site=="treatmentsite" 
+ts<-list()
+ts$mean<-colMeans(d_ts[,c(3,6)])
+ts$std<- c(sd(d_ts[,3]), sd(d_ts[,6]))
+##### To present standard deviation for Site=="treatmentsite"  
+ts <- as.data.frame(ts)
+head(ts)
+##### To calculate standard deviation for Site=="controlsite"
+cs<-list()
+cs$mean<-colMeans(d_cs[,c(3,6)])
+cs$sd<- c(sd(d_cs[,3]), sd(d_cs[,6]))
+##### To present standard deviation for Site=="controlsite" 
+cs <- as.data.frame(cs);
+head(cs)
+
+### Question 8
+
+#### Making a box plot
+ts <- subset(d, Site="treatmentsite")
+head(ts)
+cs <- subset(d, Site=="controlsite")
+head(cs)
+
+```
 ```
