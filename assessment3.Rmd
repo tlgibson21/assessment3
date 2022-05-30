@@ -131,6 +131,14 @@ list.files()
 
 cds <- seqinr::read.fasta("mhp_cds.fa")
 str(head(cds))
+
+### Question 8
+
+#### Making a box plot
+ts <- subset(d, Site="treatmentsite")
+head(ts)
+cs <- subset(d, Site=="controlsite")
+head(cs)
 ```
 
 
