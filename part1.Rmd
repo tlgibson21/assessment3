@@ -134,12 +134,7 @@ colnames(d, do.NULL = TRUE, prefix = "col")
 ### Question 7 
 
 #### To calculate mean
-##### To do row-wise subsetting for Site=="controlsite"
-d_cs <- d[d$Site=="controlsite", ]
-head(d_cs)
-##### To do row-wise subsetting for Site=="treatmentsite"
-d_ts <- d[d$Site=="treatmentsite", ]
-head(d_ts)
+
 
 # New code to calculate mean and standard deviation
 
@@ -190,28 +185,12 @@ mean(end_site2)
 sd(end_site2)
 
 #### To calculate standard deviation
-##### To calculate standard deviation for Site=="treatmentsite" 
-ts<-list()
-ts$mean<-colMeans(d_ts[,c(3,6)])
-ts$std<- c(sd(d_ts[,3]), sd(d_ts[,6]))
-##### To present standard deviation for Site=="treatmentsite"  
-ts <- as.data.frame(ts)
-head(ts)
-##### To calculate standard deviation for Site=="controlsite"
-cs<-list()
-cs$mean<-colMeans(d_cs[,c(3,6)])
-cs$sd<- c(sd(d_cs[,3]), sd(d_cs[,6]))
-##### To present standard deviation for Site=="controlsite" 
-cs <- as.data.frame(cs);
-head(cs)
+
 
 ### Question 8
 
 #### Making a box plot
-ts <- subset(d, Site="treatmentsite")
-head(ts)
-cs <- subset(d, Site=="controlsite")
-head(cs)
+
 
 # New code for boxplot
 
