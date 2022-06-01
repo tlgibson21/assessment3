@@ -41,7 +41,7 @@ This is my introduction to analysing gene expression.
 
 **1. Read in the file, making the gene identifiers the row names. Show a table of values for the first six genes.**
 
-To solve this problem, I opened [Gene expression](https://github.com/markziemann/SLE712_files/blob/master/assessment_task3/bioinfo_asst3_part1_files/gene_expression.tsv) and clicked on [View Raw](https://raw.githubusercontent.com/markziemann/SLE712_files/master/assessment_task3/bioinfo_asst3_part1_files/gene_expression.tsv). I then copied the URL and used the `read.table()` command to read in the data file. I added `header=TRUE` to remove the variable numbers at the start of each column. I then added `rownames=1` to make the gene identifiers the row names. Next, I used the assignment operator `<-` to name the function `gene_exp`. The `head()` function allowed me to display the first six genes, and the kable code styled my table.
+To solve this problem, I opened [Gene expression](https://github.com/markziemann/SLE712_files/tree/master/assessment_task3/bioinfo_asst3_part1_files) and clicked on **View Raw**. I then copied the URL and used the `read.table()` command to read in the data file. I added `header=TRUE` to remove the variable numbers at the start of each column. I then added `rownames=1` to make the gene identifiers the row names. Next, I used the assignment operator `<-` to name the function `gene_exp`. The `head()` function allowed me to display the first six genes, and the kable code styled my table.
 
 ```{r gene_exp}
 # Read in data file
