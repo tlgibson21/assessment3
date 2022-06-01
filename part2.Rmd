@@ -375,7 +375,7 @@ under_mhp <- head(sorted_mhp, n = 10L)
 
 over_mhp <- tail(sorted_mhp, n = 10L)
 
-under_ecoli <- head(sorted_ecoli, n = 10L)
+under_e.coli <- head(sorted_ecoli, n = 10L)
 
 over_e.coli <- tail(sorted_ecoli, n = 10L)
 ```
@@ -403,7 +403,7 @@ grid()
 Create a plot for the under-represented k-mers in *E. coli*.
 
 ```{r e.coli under plot}
-barplot(under_ecoli,
+barplot(under_e.coli,
         xlab="Protein Sequence K-mers",
         ylab="Frequency", main="E. coli Under-represented K-mers")
 
