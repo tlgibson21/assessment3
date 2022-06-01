@@ -35,6 +35,8 @@ library("kableExtra")
 })
 ```
 
+Source: https://github.com/tlgibson21/assessment3/blob/main/part1.Rmd
+
 ## Section 1: Gene expression
 
 This is my introduction to analysing gene expression.
