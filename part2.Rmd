@@ -263,3 +263,39 @@ Create a bar plot for amino acid frequency of *M. hyopneumoniae*.
 barplot(prot_total_seq_mhp, xlab="Amino Acids", 
         ylab="Frequency", main="M. hyopneumoniae CDS composition")
 ```
+
+**4. Create a codon usage table and quantify the codon usage bias among all coding sequences.**
+
+Calculate codon usage for the protein sequence of *E. coli*.
+
+```{r e.coli codon usage}
+
+uco(ecoli[[2]])
+
+codon_usage_e <- uco(ecoli[[2]],index="rscu",as.data.frame=TRUE)
+
+codon_usage_e %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+Calculate codon usage for the protein sequence of *M. hyopneumoniae*.
+
+```{r mhp codon usage}
+uco(mhp[[2]])
+
+codon_usage_m <- uco(mhp[[2]],index="rscu",as.data.frame=TRUE)
+
+codon_usage_m %>%
+  kbl() %>%
+  kable_paper("hover", full_width = F)
+```
+
+Plot a codon usage bias chart.
+
+```{r codon usage bias}
+plot(codon_usage_e,codon_usage_m,
+     main="Codon Usage Bias E.coli compared with M. hyopneumoniae")
+```
+
+Describe any differences between the two organisms with respect to their codon usage bias.
