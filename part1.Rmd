@@ -112,41 +112,43 @@ hist(gene_exp$Mean, xlab="Mean",
 
 This is my introduction to analysing growth data.
 
-```{r growth}
-## GROWTH DATA FILE
+**6. .**
 
-### How to download file
+...description
+
+```{r growth_data}
+# How to download file
 
 download.file(url = "https://raw.githubusercontent.com/markziemann/SLE712_files/master/assessment_task3/bioinfo_asst3_part1_files/growth_data.csv", 
               destfile = "growth_data.csv")
 
 ### Reading file into RSTudio
-d <- read.csv("growth_data.csv")
-head(d)
-### To check structure of data 
-str(d)
-### To deactivate the default setting of recognising strings as factors and remove extra headings
-d <- read.csv("growth_data.csv", stringsAsFactors = FALSE, header = TRUE)
-head(d)
-str(d)
+growth_d <- read.csv("growth_data.csv")
+head(growth_d)
 
-###Question 6
+### To check structure of data 
+str(growth_d)
+
+### To deactivate the default setting of recognising strings as factors and remove extra headings
+growth_d <- read.csv("growth_data.csv", stringsAsFactors = FALSE, header = TRUE)
+head(growth_d)
+str(growth_d)
 
 #### To find column names
-colnames(d, do.NULL = TRUE, prefix = "col")
+colnames(growth_d, do.NULL = TRUE, prefix = "col")
+```
 
-### Question 7 
+**7. **
 
-#### To calculate mean
+...description
 
-
-# New code to calculate mean and standard deviation
+```{r mean and sd}
 
 # Subset each site
 
-site1 <- subset(d,Site == "northeast")
+site1 <- subset(growth_d,Site == "northeast")
 
-site2 <- subset(d,Site == "southwest")
+site2 <- subset(growth_d,Site == "southwest")
 
 # Mean and standard deviation at the 
 # start of the study at the
@@ -187,16 +189,14 @@ end_site2 <- site2$Circumf_2020_cm
 mean(end_site2)
 
 sd(end_site2)
+```
 
-#### To calculate standard deviation
+**8. .**
 
+...description
 
-### Question 8
-
-#### Making a box plot
-
-
-# New code for boxplot
+```{r Box plot}
+# How to make a box plot
 
 boxplot(site1$Circumf_2005_cm,site1$Circumf_2020_cm,
         site2$Circumf_2005_cm,site2$Circumf_2020_cm,
@@ -204,4 +204,45 @@ boxplot(site1$Circumf_2005_cm,site1$Circumf_2020_cm,
                 "2005 at SW site","2020 at SW site"),
         main="Tree Circumference at the Start and End of the study at Both Sites",
         ylab="Tree Circumference (cm)")
+
+grid()
+```
+
+**9. .**
+
+...description
+
+```{r Mean for the last 10 years}
+# How to calculate the mean growth over the last 10 years
+
+mid_site1 <- site1$Circumf_2010_cm
+mid_site2 <- site2$Circumf_2010_cm
+end_site1
+end_site2
+
+growth_rate_site1 <- ((end_site1-mid_site1)/mid_site1)
+growth_rate_site2 <- ((end_site2-mid_site2)/mid_site2)
+
+mean_site1 <- mean(growth_rate_site1)
+
+mean_site2 <- mean(growth_rate_site2)
+
+mean_growth <- mean(growth_rate_site1+growth_rate_site2)
+```
+
+**10. .**
+
+...description
+
+```{r t test}
+# 
+res <- t.test (growth_rate_site1,growth_rate_site2)
+
+p.value <- res$p.value
+
+HEADER <- paste("P Value:" , signif(p.value,3))
+
+
+
+
 ```
