@@ -241,6 +241,8 @@ Create a bar plot for nucleotide frequency of *E. coli*.
 ```{r e.coli dna bar}
 barplot(dna_freq_ecoli, xlab="Nucleotides", 
         ylab="Frequency", main="E. coli CDS composition")
+
+grid()
 ```
 
 Create a bar plot for amino acid frequency of *E. coli*.
@@ -248,6 +250,8 @@ Create a bar plot for amino acid frequency of *E. coli*.
 ```{r mhp dna bar}
 barplot(prot_total_seq_ecoli, xlab="Amino Acids", 
         ylab="Frequency", main="E. coli CDS composition")
+
+grid()
 ```
 
 Create a bar plot for nucleotide frequency of *M. hyopneumoniae*.
@@ -255,6 +259,8 @@ Create a bar plot for nucleotide frequency of *M. hyopneumoniae*.
 ```{r e.coli protein bar}
 barplot(dna_freq_mhp, xlab="Nucleotides", 
         ylab="Frequency", main="M. hyopneumoniae CDS composition")
+
+grid()
 ```
 
 Create a bar plot for amino acid frequency of *M. hyopneumoniae*.
@@ -262,6 +268,8 @@ Create a bar plot for amino acid frequency of *M. hyopneumoniae*.
 ```{r mhp protein bar}
 barplot(prot_total_seq_mhp, xlab="Amino Acids", 
         ylab="Frequency", main="M. hyopneumoniae CDS composition")
+
+grid()
 ```
 
 **4. Create a codon usage table and quantify the codon usage bias among all coding sequences.**
