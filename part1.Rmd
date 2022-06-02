@@ -235,15 +235,18 @@ mean_growth <- mean(growth_rate_site1+growth_rate_site2)
 To solve this problem, I added a function `res <- t.test (growth_rate_site1,growth_rate_site2)` and then `p.value <- res$p.value` to find the p value. To round the number into 3 digits I added `HEADER <- paste("P Value:" , signif(p.value,3))`.
 
 ```{r t test}
-# 
+
 res <- t.test (growth_rate_site1,growth_rate_site2)
-
 p.value <- res$p.value
+t.test(growth_rate_site1,growth_rate_site2)
+HEADER <- paste("P Value:" , signif(p.value,3))
+
+res <- wilcox.test(growth_rate_site1,growth_rate_site2)
+p.value <- res$p.value
+wilcox.test(growth_rate_site1,growth_rate_site2)
 HEADER <- paste("P Value:" , signif(p.value,3))
 
 
-p.value2 <- wilcox.test(growth_rate_site1,growth_rate_site2)
-HEADER <- paste("P Value:" , signif(p.value,3))
 
 ####tay don't freeked out. We got this
 
