@@ -336,9 +336,7 @@ Describe any differences between the two organisms with respect to their codon u
 Calculate protein sequence k-mers for the organism of interest *M. hyopneumoniae*.
 
 ```{r mhp k-mers}
-prots_mhp <- unlist(prot_mhp)
-
-mycounts_mhp <- count(prots_mhp,wordsize=3,alphabet=aa_m)
+mycounts_mhp <- count(prot_seq_mhp,wordsize=3,alphabet=aa_m)
 
 str(mycounts_mhp)
 
@@ -348,7 +346,7 @@ head(mycounts_mhp)
 The most under-represented protein sequence k-mers for *M. hyopneumoniae*.
 
 ```{r mhp k-mers under}
-myfreq_mhp <- count(prots_mhp,wordsize=3,alphabet=aa_m,freq=TRUE)
+myfreq_mhp <- count(prot_seq_mhp,wordsize=3,alphabet=aa_m,freq=TRUE)
 
 sorted_mhp <- sort(myfreq_mhp)
 
@@ -364,9 +362,7 @@ tail(sorted_mhp, n = 10L)
 Calculate protein sequence k-mers for *E. coli*.
 
 ```{r e.coli k-mers}
-prots_ecoli <- unlist(prot_ecoli)
-
-mycounts_ecoli <- count(prots_ecoli,wordsize=3,alphabet=aa_e)
+mycounts_ecoli <- count(prot_seq_ecoli,wordsize=3,alphabet=aa_e)
 
 str(mycounts_ecoli)
 
@@ -376,7 +372,7 @@ head(mycounts_ecoli)
 The most under-represented protein sequence k-mers for *E. coli*.
 
 ```{r e.coli k-mers under}
-myfreq_ecoli <- count(prots_ecoli,wordsize=3,alphabet=aa_e,freq=TRUE)
+myfreq_ecoli <- count(prot_seq_ecoli,wordsize=3,alphabet=aa_e,freq=TRUE)
 
 sorted_ecoli <- sort(myfreq_ecoli)
 
@@ -437,6 +433,218 @@ Create a plot for the over-represented k-mers in *E. coli*.
 
 ```{r e.coli over plot}
 barplot(over_e.coli,
+        xlab="Protein Sequence K-mers",
+        ylab="Frequency", main="E. coli Over-represented K-mers")
+
+grid()
+```
+
+**5. Adjust for length of 4.**
+
+Calculate protein sequence k-mers for the organism of interest *M. hyopneumoniae*.
+
+```{r mhp 4 k-mers}
+mycounts_4_mhp <- count(prot_seq_mhp,wordsize=4,alphabet=aa_m)
+
+str(mycounts_4_mhp)
+
+head(mycounts_4_mhp)
+```
+
+The most under-represented protein sequence k-mers for *M. hyopneumoniae*.
+
+```{r mhp 4 k-mers under}
+myfreq_4_mhp <- count(prot_seq_mhp,wordsize=4,alphabet=aa_m,freq=TRUE)
+
+sorted_4_mhp <- sort(myfreq_4_mhp)
+
+head(sorted_4_mhp, n = 10L)
+```
+
+The most over-represented protein sequence k-mers for *M. hyopneumoniae*.
+
+```{r mhp 4 k-mers over}
+tail(sorted_4_mhp, n = 10L)
+```
+
+Calculate protein sequence k-mers for *E. coli*.
+
+```{r e.coli 4 k-mers}
+mycounts_4_ecoli <- count(prot_seq_ecoli,wordsize=4,alphabet=aa_e)
+
+str(mycounts_4_ecoli)
+
+head(mycounts_4_ecoli)
+```
+
+The most under-represented protein sequence k-mers for *E. coli*.
+
+```{r e.coli 4 k-mers under}
+myfreq_4_ecoli <- count(prot_seq_ecoli,wordsize=4,alphabet=aa_e,freq=TRUE)
+
+sorted_4_ecoli <- sort(myfreq_4_ecoli)
+
+head(sorted_4_ecoli, n = 10L)
+```
+
+The most over-represented protein sequence k-mers for *E. coli*.
+
+```{r e.coli 4 k-mers over}
+tail(sorted_4_ecoli, n = 10L)
+```
+
+**5. Provide plots to support your observations.**
+
+Define variables for each organism.
+
+```{r plot 4 variables}
+under_4_mhp <- head(sorted_4_mhp, n = 10L)
+
+over_4_mhp <- tail(sorted_4_mhp, n = 10L)
+
+under_4_e.coli <- head(sorted_4_ecoli, n = 10L)
+
+over_4_e.coli <- tail(sorted_4_ecoli, n = 10L)
+```
+
+Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
+
+```{r mhp 4 under plot}
+barplot(under_4_mhp,
+        xlab="Protein Sequence K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers")
+
+grid()
+```
+
+Create a plot for the over-represented k-mers in *M. hyopneumoniae*.
+
+```{r mhp 4 over plot}
+barplot(over_4_mhp,
+        xlab="Protein Sequence K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers")
+
+grid()
+```
+
+Create a plot for the under-represented k-mers in *E. coli*.
+
+```{r e.coli 4 under plot}
+barplot(under_4_e.coli,
+        xlab="Protein Sequence K-mers",
+        ylab="Frequency", main="E. coli Under-represented K-mers")
+
+grid()
+```
+
+Create a plot for the over-represented k-mers in *E. coli*.
+
+```{r e.coli 4 over plot}
+barplot(over_4_e.coli,
+        xlab="Protein Sequence K-mers",
+        ylab="Frequency", main="E. coli Over-represented K-mers")
+
+grid()
+```
+
+**5. Adjust for length of 5.**
+
+Calculate protein sequence k-mers for the organism of interest *M. hyopneumoniae*.
+
+```{r mhp 5 k-mers}
+mycounts_5_mhp <- count(prot_seq_mhp,wordsize=5,alphabet=aa_m)
+
+head(mycounts_5_mhp)
+```
+
+The most under-represented protein sequence k-mers for *M. hyopneumoniae*.
+
+```{r mhp 5 k-mers under}
+myfreq_5_mhp <- count(prot_seq_mhp,wordsize=5,alphabet=aa_m,freq=TRUE)
+
+sorted_5_mhp <- sort(myfreq_5_mhp)
+
+head(sorted_5_mhp, n = 10L)
+```
+
+The most over-represented protein sequence k-mers for *M. hyopneumoniae*.
+
+```{r mhp 5 k-mers over}
+tail(sorted_5_mhp, n = 10L)
+```
+
+Calculate protein sequence k-mers for *E. coli*.
+
+```{r e.coli 5 k-mers}
+mycounts_5_ecoli <- count(prot_seq_ecoli,wordsize=5,alphabet=aa_e)
+
+head(mycounts_5_ecoli)
+```
+
+The most under-represented protein sequence k-mers for *E. coli*.
+
+```{r e.coli 5 k-mers under}
+myfreq_5_ecoli <- count(prot_seq_ecoli,wordsize=5,alphabet=aa_e,freq=TRUE)
+
+sorted_5_ecoli <- sort(myfreq_5_ecoli)
+
+head(sorted_5_ecoli, n = 10L)
+```
+
+The most over-represented protein sequence k-mers for *E. coli*.
+
+```{r e.coli 5 k-mers over}
+tail(sorted_5_ecoli, n = 10L)
+```
+
+**5. Provide plots to support your observations.**
+
+Define variables for each organism.
+
+```{r plot 5 variables}
+under_5_mhp <- head(sorted_5_mhp, n = 10L)
+
+over_5_mhp <- tail(sorted_5_mhp, n = 10L)
+
+under_5_e.coli <- head(sorted_5_ecoli, n = 10L)
+
+over_5_e.coli <- tail(sorted_5_ecoli, n = 10L)
+```
+
+Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
+
+```{r mhp 5 under plot}
+barplot(under_5_mhp,
+        xlab="Protein Sequence K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers")
+
+grid()
+```
+
+Create a plot for the over-represented k-mers in *M. hyopneumoniae*.
+
+```{r mhp 5 over plot}
+barplot(over_5_mhp,
+        xlab="Protein Sequence K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers")
+
+grid()
+```
+
+Create a plot for the under-represented k-mers in *E. coli*.
+
+```{r e.coli 5 under plot}
+barplot(under_5_e.coli,
+        xlab="Protein Sequence K-mers",
+        ylab="Frequency", main="E. coli Under-represented K-mers")
+
+grid()
+```
+
+Create a plot for the over-represented k-mers in *E. coli*.
+
+```{r e.coli 5 over plot}
+barplot(over_5_e.coli,
         xlab="Protein Sequence K-mers",
         ylab="Frequency", main="E. coli Over-represented K-mers")
 
