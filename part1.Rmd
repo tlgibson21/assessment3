@@ -240,11 +240,9 @@ To solve this problem, I added a function `res <- t.test (growth_rate_site1,grow
 res <- t.test (growth_rate_site1,growth_rate_site2)
 
 p.value <- res$p.value
-
 HEADER <- paste("P Value:" , signif(p.value,3))
 
-res <- wilcox.test (growth_rate_site1,growth_rate_site2)
 
-p.value <- res$p.value
-wilcox.test(growth_rate_site1,growth_rate_site2)
+p.value2 <- wilcox.test(growth_rate_site1,growth_rate_site2)
+HEADER <- paste("P Value:" , signif(p.value,3))
 ```
