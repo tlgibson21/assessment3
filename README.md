@@ -13,3 +13,4 @@ This section will demonstrate how to plot a box plot to visualise the difference
 
 Part 2 uses coding DNA sequences from two organisms, E.coli and M. hyopneumoniae.
 This part will demonstrate how to download and unzip sequence files, analyse the sequence data, evaluate nucleotide and amino acid frequency and demonstrate them using bar plots, estimate codon usage bias and evaluate protein sequence k-mer frequencies.
+
