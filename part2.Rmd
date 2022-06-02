@@ -329,6 +329,31 @@ plot(codon_usage_e,codon_usage_m,
      main="Codon Usage Bias E.coli compared with M. hyopneumoniae")
 ```
 
+
+## NEW code for question 4
+```{r codon usage for e.coli}
+uco(ecoli[[2]])
+codon_usage_e <- uco(ecoli[[2]],index = "rscu",as.data.frame = TRUE)
+
+codon_usage_e
+codon_usage_e%>%
+kbl()%>%
+  kable_paper(full_width = F, html_font = "AArial")
+plot(codon_usage_e)
+
+```
+
+```{r codon usage for hyopneumoniae }
+uco(mhp[[2]])
+codon_usage_m <- uco(mhp[[2]],index = "rscu",as.data.frame = TRUE)
+codon_usage_m
+codon_usage_m%>%
+  kbl()%>%
+   kable_paper(full_width = F, html_font = "AArial")
+plot(codon_usage_m)
+```
+
+
 Describe any differences between the two organisms with respect to their codon usage bias.
 
 **5. In the organism of interest, identify 10 protein sequence k-mers of length 3-5 which are the most over- and under-represented k-mers in your organism of interest.**
