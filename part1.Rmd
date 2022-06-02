@@ -112,9 +112,10 @@ hist(gene_exp$Mean, xlab="Mean",
 
 This is my introduction to analysing growth data.
 
-**6. .**
+**6.Read in the growth data file, import into an  R object, calculate mean and SD  of tree circumference, make a box plot and estimate the p-value.**
 
-...description
+To solve this problem, I opened [Growth data](https://github.com/markziemann/SLE712_files/tree/master/assessment_task3/bioinfo_asst3_part1_files) and clicked on **View Raw**. I then copied the URL and used the `read.table()` command to read in the data file.Next, I used the assignment operator `<-` to name the function `grwoth_d`.I added `header=TRUE` to remove the variable numbers at the start of each column.I then added `str(growth_d)` to check the structure of data. To find column names, I added `colnames(growth_d, do.NULL = TRUE, prefix = "col")`.
+
 
 ```{r growth_data}
 # How to download file
@@ -138,9 +139,9 @@ str(growth_d)
 colnames(growth_d, do.NULL = TRUE, prefix = "col")
 ```
 
-**7. **
+**7.calculate the mean and SD of tree circumference at the start and end of the study at both sites**
 
-...description
+To solve this problem, I subset the each site `site1 <- subset(growth_d,Site == "northeast")` and `site2 <- subset(growth_d,Site == "southwest")`. To find the mean and standard deviation in northeast site,  I added  `start_site1 <- site1$Circumf_2005_cm` then`mean(start_site1)` and `sd(start_site1)` and will be repeated for the southwest site.
 
 ```{r mean and sd}
 
@@ -191,9 +192,9 @@ mean(end_site2)
 sd(end_site2)
 ```
 
-**8. .**
+**8.Make a box plot of tree circumference at the start and end of the study at both sites.**
 
-...description
+To make a box plot, I added, the below coding and I added, `main="Tree Circumference at the Start and End of the study at Both Sites"` to make the header of the plot and then I added ` ylab="Tree Circumference (cm)")`to label the Y-axis of plot. Finally, I added `grid()` to add grid to the plot.
 
 ```{r Box plot}
 # How to make a box plot
@@ -208,9 +209,9 @@ boxplot(site1$Circumf_2005_cm,site1$Circumf_2020_cm,
 grid()
 ```
 
-**9. .**
+**9.Calculate the mean growth over the last 10 years at each site.**
 
-...description
+To solve this problem, I subset each site separately using `mid_site1 <- site1$Circumf_2010_cm` and `mid_site2 <- site2$Circumf_2010_cm`. Then I added the coding for growth rate for each site using `growth_rate_site1 <- ((end_site1-mid_site1)/mid_site1)` and `growth_rate_site2 <- ((end_site2-mid_site2)/mid_site2)`
 
 ```{r Mean for the last 10 years}
 # How to calculate the mean growth over the last 10 years
@@ -230,9 +231,9 @@ mean_site2 <- mean(growth_rate_site2)
 mean_growth <- mean(growth_rate_site1+growth_rate_site2)
 ```
 
-**10. .**
+**10.t.test and wilcox.test functions to estimate the p-value that the 10 year growth is different at the two sites.**
 
-...description
+To solve this problem, I added a function `res <- t.test (growth_rate_site1,growth_rate_site2)` and then `p.value <- res$p.value` to find the p value. To round the number into 3 digits I added `HEADER <- paste("P Value:" , signif(p.value,3))`.
 
 ```{r t test}
 # 
@@ -242,7 +243,8 @@ p.value <- res$p.value
 
 HEADER <- paste("P Value:" , signif(p.value,3))
 
+res <- wilcox.test (growth_rate_site1,growth_rate_site2)
 
-
-
+p.value <- res$p.value
+wilcox.test(growth_rate_site1,growth_rate_site2)
 ```
