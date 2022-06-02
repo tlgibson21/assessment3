@@ -35,6 +35,8 @@ Comparing *Escherichia coli* to *Mycoplasma hyopneumoniae*.
 
 **1. Download the whole set of coding DNA sequences for *E. coli* and your organism of interest *M. hyopneumoniae*.**
 
+Firstly, I installed a selection of packages into the RMarkdown to assist in loading, analysing and displaying the sequence data. I visited [Ensembl](https://bacteria.ensembl.org/index.html) to download the genomic sequence data of `E.coli` and `M. hyopneumoniae` (Ziemann 2022). I right clicked on each folder to “copy link address” and saved the location using the `URL` function. I then used the `download.file()` function to download the contents, and the `R.utils` package allowed me to employ the `gunzip()` function. Lastly, `list.files()` permitted me to view the files in my project folder. The `seqinr` package supports the use of `seqinr::read.fasta()` to read in the sequence and `str()` displays the type of data, while `head()` shows only the first six genes.
+
 ```{r packages}
 suppressPackageStartupMessages({
 library("seqinr")
@@ -43,9 +45,7 @@ library("R.utils")
 })
 ```
 
-#### Download *E. coli* coding DNA sequence
-
-To download the whole set of coding DNA sequence for *E. coli*, I visited the website...
+Download *E. coli* coding DNA sequence
 
 ```{r e.coli sequence data}
 URL="http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
@@ -61,7 +61,7 @@ ecoli <- seqinr::read.fasta("ecoli_cds.fa")
 str(head(ecoli))
 ```
 
-#### Download *M. hyopneumoniae* coding DNA sequence
+Download *M. hyopneumoniae* coding DNA sequence
 
 ```{r m. hyopneumoniae sequence data}
 URL="http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_40_collection/mycoplasma_hyopneumoniae_gca_004768725/cdna/Mycoplasma_hyopneumoniae_gca_004768725.ASM476872v1.cdna.all.fa.gz"
@@ -79,6 +79,8 @@ str(head(mhp))
 
 **1. How many coding sequences are present in these organisms?**
 
+The number of coding sequence can be found using `length()`.
+
 The number of coding sequences present in *E. coli*.
 
 ```{r e.coli cds}
@@ -92,6 +94,8 @@ length(mhp)
 ```
 
 **1. How much coding DNA is there in total for these two organisms?**
+
+The amount of coding DNA can be generated using the `sum()` function encircling `sapply()` which can be used to apply the `FUN=length` function to the either the `X=ecoli` or `X=mhp` data sets specific to `[1:3]` three characters.
 
 The amount of coding DNA in total for *E. coli*.
 
@@ -107,9 +111,13 @@ sum(sapply(mhp[1:3],length))
 
 **1. Describe any differences between the two organisms.**
 
-*E.coli* has a greater
+*E. coli* has a larger number of coding sequences when compared with *M. hyopneumoniae*.
+
+*M. hyopneumoniae* has a greater amount of coding DNA when compared with *E. coli*.
 
 **2. Calculate the length of all coding sequences in these two organisms.**
+
+The total sequence length requires defining the variable `sapply()` which is the same as above but includes all characters. This variable can then be inserted into the `sum()` function to supply the entire sequence length. It could further be enclosed in the `mean()` and `median()` functions to show these parameters. The `sum()` function could be further defined to be incorporated within a `boxplot()` where `c()` can be used to distinguish between each parameter.
 
 The total sequence length for *E. coli*.
 
@@ -164,9 +172,12 @@ median(cds_mhp)
 
 **2. Describe any differences between the two organisms.**
 
-*E. coli* has a greater
+*E. coli* has a significantly larger total sequence length when compared with *M. hyopneumoniae* as shown by the sum of each and the boxplot generated.
+The mean and median total sequence lengths are slightly greater in *M. hyopneumoniae* when compared with *E. coli*.
 
 **3. Calculate the frequency of DNA bases in the total coding sequences for both organisms.**
+
+To evaluate the frequency of DNA bases the `unlist` function is required for each organism. Once this function has been defined as a variable it can be injected into the `count()` function to demonstrate the frequency.
 
 The frequency of DNA bases for *E. coli*.
 
@@ -185,6 +196,8 @@ count(dna_mhp, wordsize = 1)
 ```
 
 **3. Perform the same calculation for the total protein sequence.**
+
+To estimate the frequency of amino acids the `translate` function is used to translate the sequences. Then the `lapply` function can translate each sequence so that it can be defined as a variable. This variable can then be inserted into the `unique()` function to define the amino acid alphabet (Ziemann 2022). From here, this variable can be enclosed in the `unlist` function and the variable obtained from this can be applied to the `count()` function including the defined alphabet.
 
 The frequency of protein for *E. coli*.
 
@@ -223,6 +236,8 @@ count(prot_seq_mhp, alphabet = aa_m,wordsize = 1)
 ```
 
 **3. Create bar plots for nucleotide and amino acid frequency.**
+
+The results of each `count()` function when applied to DNA bases and amino acids in each organism can then be plotted in independent bar plots.
 
 Define variables for each organism.
 
@@ -271,6 +286,14 @@ barplot(prot_total_seq_mhp, xlab="Amino Acids",
 
 grid()
 ```
+
+**3. Describe any differences between the two organisms.**
+
+The frequency of DNA bases in *E. coli* are fairly even, however, there is far more guanine than the three bases. The frequency of DNA bases in *M. hyopneumoniae* are staggered, demonstrating adenine as the most frequent base and cytosine as the least frequent base.
+
+The frequency of the protein sequence in *E. coli* demonstrates leucine, alanine and glycine as the most frequent amino acids and cysteine, tryptophan and histidine as the least frequent amino acids.
+
+The frequency of the protein sequence in *M. hyopneumoniae* demonstrates lysine, leucine and isoleucine as the most frequent amino acids and cysteine, histidine and methionine as the least frequent amino acids.
 
 **4. Create a codon usage table and quantify the codon usage bias among all coding sequences.**
 
