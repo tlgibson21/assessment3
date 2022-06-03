@@ -1,41 +1,34 @@
 ---
-title: "part2"
+title: "Part 2"
 author: "Lahirunee Rupasinghe & Tayla Gibson"
 date: '2022-05-27'
 output: html_document
+theme: yeti
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
 ## Part 2: Examining Biological Sequence Diversity
 
-Comparing *Escherichia coli* to *Mycoplasma hyopneumoniae*.
+This part of Assessment 3 involves comparing sequencing data from the organisms *Escherichia coli* str. K-12 substr. MG1655 str. K12 (GCA_000005845) and *Mycoplasma hyopneumoniae* str. ES-2 (GCA_004768725).
+
+Source: https://github.com/tlgibson21/assessment3/blob/main/part2.Rmd
 
 **1. Download the whole set of coding DNA sequences for *E. coli* and your organism of interest *M. hyopneumoniae*.**
 
-Firstly, I installed a selection of packages into the RMarkdown to assist in loading, analysing and displaying the sequence data. I visited [Ensembl](https://bacteria.ensembl.org/index.html) to download the genomic sequence data of `E.coli` and `M. hyopneumoniae` (Ziemann 2022). I right clicked on each folder to “copy link address” and saved the location using the `URL` function. I then used the `download.file()` function to download the contents, and the `R.utils` package allowed me to employ the `gunzip()` function. Lastly, `list.files()` permitted me to view the files in my project folder. The `seqinr` package supports the use of `seqinr::read.fasta()` to read in the sequence and `str()` displays the type of data, while `head()` shows only the first six genes.
+Firstly, I installed a selection of packages into the RMarkdown to assist in loading, analysing and displaying the sequence data.
+
+I visited [Ensembl](https://bacteria.ensembl.org/index.html) to download the genomic sequence data of `E.coli` and `M. hyopneumoniae` (Ziemann 2022).
+
+I right clicked on each folder to “copy link address” and saved the location using the `URL` function.
+
+I then used the `download.file()` function to download the contents, and the `R.utils` package allowed me to employ the `gunzip()` function to unzip the files.
+
+Lastly, `list.files()` permitted me to view the files in my project folder.
+
+The `seqinr` package supports the use of `seqinr::read.fasta()` to read in the sequence and `str()` displays the structure of the data, while `head()` shows only the first six elements.
 
 ```{r packages}
 suppressPackageStartupMessages({
@@ -50,15 +43,15 @@ Download *E. coli* coding DNA sequence
 ```{r e.coli sequence data}
 URL="http://ftp.ensemblgenomes.org/pub/bacteria/release-53/fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cds/Escherichia_coli_str_k_12_substr_mg1655_gca_000005845.ASM584v2.cds.all.fa.gz"
 
-download.file(URL,destfile="ecoli_cds.fa.gz")
+download.file(URL,destfile="ecoli_cds.fa.gz") # download sequence file
 
-gunzip("ecoli_cds.fa.gz")
+gunzip("ecoli_cds.fa.gz") # unzip the file
 
-list.files()
+list.files() # view the file
 
-ecoli <- seqinr::read.fasta("ecoli_cds.fa")
+ecoli <- seqinr::read.fasta("ecoli_cds.fa") # read in the sequence file
 
-str(head(ecoli))
+str(head(ecoli)) # view the structure with six components
 ```
 
 Download *M. hyopneumoniae* coding DNA sequence
@@ -66,47 +59,47 @@ Download *M. hyopneumoniae* coding DNA sequence
 ```{r m. hyopneumoniae sequence data}
 URL="http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_40_collection/mycoplasma_hyopneumoniae_gca_004768725/cdna/Mycoplasma_hyopneumoniae_gca_004768725.ASM476872v1.cdna.all.fa.gz"
 
-download.file(URL,destfile="mhp_cds.fa.gz")
+download.file(URL,destfile="mhp_cds.fa.gz") # download sequence file
 
-gunzip("mhp_cds.fa.gz")
+gunzip("mhp_cds.fa.gz") # unzip the file
 
-list.files()
+list.files() # view the file
 
-mhp <- seqinr::read.fasta("mhp_cds.fa")
+mhp <- seqinr::read.fasta("mhp_cds.fa") # read in the sequence file
 
-str(head(mhp))
+str(head(mhp)) # view the structure with six components
 ```
 
 **1. How many coding sequences are present in these organisms?**
 
-The number of coding sequence can be found using `length()`.
+The `length()` function can be used to determine the amount of coding sequences.
 
 The number of coding sequences present in *E. coli*.
 
 ```{r e.coli cds}
-length(ecoli)
+length(ecoli) # number of coding sequences
 ```
 
 The number of coding sequences present in *M. hyopneumoniae*.
 
 ```{r mhp cds}
-length(mhp)
+length(mhp) # number of coding sequences
 ```
 
 **1. How much coding DNA is there in total for these two organisms?**
 
-The amount of coding DNA can be generated using the `sum()` function encircling `sapply()` which can be used to apply the `FUN=length` function to the either the `X=ecoli` or `X=mhp` data sets specific to `[1:3]` three characters.
+The amount of coding DNA can be generated using the `sum()` function encircling `sapply()`, which can be used to apply the `FUN=length` function to the either the `X=ecoli` or `X=mhp` data sets specific to `[1:3]` three characters.
 
 The amount of coding DNA in total for *E. coli*.
 
 ```{r e.coli cdna}
-sum(sapply(ecoli[1:3],length))
+sum(sapply(ecoli[1:3],length)) # total amount of coding DNA
 ```
 
 The amount of coding DNA in total for *M. hyopneumoniae*.
 
 ```{r mhp cdna}
-sum(sapply(mhp[1:3],length))
+sum(sapply(mhp[1:3],length)) # total amount of coding DNA
 ```
 
 **1. Describe any differences between the two organisms.**
@@ -117,22 +110,28 @@ sum(sapply(mhp[1:3],length))
 
 **2. Calculate the length of all coding sequences in these two organisms.**
 
-The total sequence length requires defining the variable `sapply()` which is the same as above but includes all characters. This variable can then be inserted into the `sum()` function to supply the entire sequence length. It could further be enclosed in the `mean()` and `median()` functions to show these parameters. The `sum()` function could be further defined to be incorporated within a `boxplot()` where `c()` can be used to distinguish between each parameter.
+The total sequence length requires defining the variable `sapply()` which is the same as above but includes all characters in the sequence.
+
+This variable can then be inserted into the `sum()` function to supply the entire sequence length.
+
+It could further be enclosed in the `mean()` and `median()` functions to show these parameters.
+
+The `sum()` function could be further defined to be incorporated within a `boxplot()` where `c()` can be used to distinguish between each parameter.
 
 The total sequence length for *E. coli*.
 
 ```{r e.coli cds len}
-cds_ecoli <- as.numeric( summary(ecoli)[,1] )
+cds_ecoli <- sapply(ecoli,length) # total sequence
 
-sum(cds_ecoli)
+sum(cds_ecoli) # determine total sequence length
 ```
 
 The total sequence length for *M. hyopneumoniae*.
 
 ```{r mhp cds len}
-cds_mhp <- as.numeric( summary(mhp)[,1] )
+cds_mhp <- sapply(mhp,length) # total sequence
 
-sum(cds_mhp)
+sum(cds_mhp) # determine total sequence length
 ```
 
 **2. Make a boxplot of coding sequence length in these organisms.**
@@ -140,9 +139,9 @@ sum(cds_mhp)
 Define variables for each organism.
 
 ```{r define}
-len_ecoli <- sum(cds_ecoli)
+len_ecoli <- sum(cds_ecoli) # total sequence length of e. coli
 
-len_mhp <- sum(cds_mhp)
+len_mhp <- sum(cds_mhp) # total sequence length of m. hyopneumoniae
 ```
 
 Create a boxplot.
@@ -157,82 +156,83 @@ boxplot(len_ecoli,len_mhp,names = c("Ecoli Coding Sequence Length","Mhp Coding S
 The mean and median total sequence length for *E. coli*.
 
 ```{r e.coli mean median}
-mean(cds_ecoli)
+mean(cds_ecoli) # determine the mean
 
-median(cds_ecoli)
+median(cds_ecoli) # determine the median
 ```
 
 The mean and median total sequence length for *M. hyopneumoniae*.
 
 ```{r mhp mean median}
-mean(cds_mhp)
+mean(cds_mhp) # determine the mean
 
-median(cds_mhp)
+median(cds_mhp) # determine the median
 ```
 
 **2. Describe any differences between the two organisms.**
 
 *E. coli* has a significantly larger total sequence length when compared with *M. hyopneumoniae* as shown by the sum of each and the boxplot generated.
+
 The mean and median total sequence lengths are slightly greater in *M. hyopneumoniae* when compared with *E. coli*.
 
 **3. Calculate the frequency of DNA bases in the total coding sequences for both organisms.**
 
-To evaluate the frequency of DNA bases the `unlist` function is required for each organism. Once this function has been defined as a variable it can be injected into the `count()` function to demonstrate the frequency.
+To evaluate the frequency of DNA bases the `unlist` function is required for each organism.
+
+Once this function has been defined as a variable it can be injected into the `count()` function, using `wordsize=1` for each DNA base, to demonstrate the frequency.
 
 The frequency of DNA bases for *E. coli*.
 
 ```{r e.coli dna freq}
-dna_ecoli <- unlist(ecoli)
+dna_ecoli <- unlist(ecoli) # unlist the whole coding sequence
 
-count(dna_ecoli, wordsize = 1)
+count(dna_ecoli, wordsize = 1) # count DNA bases
 ```
 
 The frequency of DNA bases for *M. hyopneumoniae*.
 
 ```{r mhp dna freq}
-dna_mhp <- unlist(mhp)
+dna_mhp <- unlist(mhp) # unlist the whole coding sequence
 
-count(dna_mhp, wordsize = 1)
+count(dna_mhp, wordsize = 1) # count DNA bases
 ```
 
 **3. Perform the same calculation for the total protein sequence.**
 
-To estimate the frequency of amino acids the `translate` function is used to translate the sequences. Then the `lapply` function can translate each sequence so that it can be defined as a variable. This variable can then be inserted into the `unique()` function to define the amino acid alphabet (Ziemann 2022). From here, this variable can be enclosed in the `unlist` function and the variable obtained from this can be applied to the `count()` function including the defined alphabet.
+To estimate the frequency of amino acids the `translate` function is used to translate the sequences from a nucleic acid sequence to a peptide sequence.
+
+Executing this within the `lapply` function maintains the same parameters of the data frame for each organism.
+
+This variable can then be inserted into the `unique()` function to define the amino acid alphabet (Ziemann 2022).
+
+From here, this variable can be enclosed in the `unlist` function and the variable obtained from this can be applied to the `count()` function including the defined alphabet.
 
 The frequency of protein for *E. coli*.
 
 ```{r e.coli protein}
-translate(ecoli[[1]])
+prot_ecoli <- lapply(ecoli,translate) # translate DNA sequence to protein sequence
 
-prot_ecoli <- lapply(X = ecoli,FUN = translate)
-
-prot_ecoli[[1]]
-
-aa_e <- unique(prot_ecoli[[2]])
+aa_e <- unique(prot_ecoli[[2]]) # define amino acid alphabet
 
 aa_e <- aa_e[aa_e != "*"]
 
-prot_seq_ecoli <- unlist(prot_ecoli)
+prot_seq_ecoli <- unlist(prot_ecoli) # simplifies the list to a vector
 
-count(prot_seq_ecoli, alphabet = aa_e,wordsize = 1)
+count(prot_seq_ecoli, alphabet = aa_e,wordsize = 1) # count peptide sequence
 ```
 
 The frequency of protein for *M. hyopneumoniae*.
 
 ```{r mhp protein}
-translate(mhp[[1]])
-
-prot_mhp <- lapply(X = mhp,FUN = translate)
-
-prot_mhp[[1]]
+prot_mhp <- lapply(X = mhp,FUN = translate) # translate DNA sequence to protein sequence
 
 aa_m <- unique(prot_mhp[[2]])
 
 aa_m <- aa_m[aa_m != "*"]
 
-prot_seq_mhp <- unlist(prot_mhp)
+prot_seq_mhp <- unlist(prot_mhp) # simplifies the list to a vector
 
-count(prot_seq_mhp, alphabet = aa_m,wordsize = 1)
+count(prot_seq_mhp, alphabet = aa_m,wordsize = 1) # count peptide sequence
 ```
 
 **3. Create bar plots for nucleotide and amino acid frequency.**
@@ -242,13 +242,13 @@ The results of each `count()` function when applied to DNA bases and amino acids
 Define variables for each organism.
 
 ```{r define dna protein}
-dna_freq_ecoli <- count(dna_ecoli, wordsize = 1)
+dna_freq_ecoli <- count(dna_ecoli, wordsize = 1) # nucleotide frequency of e. coli
 
-prot_total_seq_ecoli <- count(prot_seq_ecoli, alphabet = aa_e,wordsize = 1)
+prot_total_seq_ecoli <- count(prot_seq_ecoli, alphabet = aa_e,wordsize = 1) # amino acid frequency of e. coli
 
-dna_freq_mhp <- count(dna_mhp, wordsize = 1)
+dna_freq_mhp <- count(dna_mhp, wordsize = 1) # nucleotide frequency of m. hyopneumoniae
 
-prot_total_seq_mhp <- count(prot_seq_mhp, alphabet = aa_m,wordsize = 1)
+prot_total_seq_mhp <- count(prot_seq_mhp, alphabet = aa_m,wordsize = 1) # amino acid frequency of m. hyopneumoniae
 ```
 
 Create a bar plot for nucleotide frequency of *E. coli*.
@@ -264,7 +264,8 @@ Create a bar plot for amino acid frequency of *E. coli*.
 
 ```{r mhp dna bar}
 barplot(prot_total_seq_ecoli, xlab="Amino Acids", 
-        ylab="Frequency", main="E. coli CDS composition")
+        ylab="Frequency", main="E. coli CDS composition",
+        cex.names=0.8)
 
 grid()
 ```
@@ -306,8 +307,8 @@ uco(ecoli[[2]])
 codon_usage_e <- uco(ecoli[[2]],index="rscu",as.data.frame=TRUE)
 
 codon_usage_e %>%
-  kbl() %>%
-  kable_paper("hover", full_width = F)
+  kbl(caption = "Table 1: Codon Usage of E. coli") %>%
+  kable_paper("hover", full_width = F, html_font = "Arial")
 ```
 
 Calculate codon usage for the protein sequence of *M. hyopneumoniae*.
@@ -318,8 +319,8 @@ uco(mhp[[2]])
 codon_usage_m <- uco(mhp[[2]],index="rscu",as.data.frame=TRUE)
 
 codon_usage_m %>%
-  kbl() %>%
-  kable_paper("hover", full_width = F)
+  kbl(caption = "Table 2: Codon Usage of M. hyopneumoniae") %>%
+  kable_paper("hover", full_width = F, html_font = "Arial")
 ```
 
 Plot a codon usage bias chart.
@@ -328,7 +329,6 @@ Plot a codon usage bias chart.
 plot(codon_usage_e,codon_usage_m,
      main="Codon Usage Bias E.coli compared with M. hyopneumoniae")
 ```
-
 
 ## NEW code for question 4
 ```{r codon usage for e.coli}
@@ -353,68 +353,74 @@ codon_usage_m%>%
 plot(codon_usage_m)
 ```
 
+**4. Describe any differences between the two organisms with respect to their codon usage bias.**
 
-**Describe any differences between the two organisms with respect to their codon usage bias.**
-Amino acids such as alanine, valine and leucine are considered hydrophobic amino acids. When comparing E.coli protein sequence with the  M. hyopneumoniae protein sequence, the alanine concentration (eff) is higher in E.coli as well as the valine concentration is also higher in E.coli than the  M. hyopneumoniae, which makes the E.coli is more hydrophobic than the M. hyopneumoniae. 
+Amino acids such as alanine, valine and leucine are considered hydrophobic amino acids.
 
-Amino acids such as serine, threonine and glutamine are considered as polar amino acids. In E.coli protein, serine has more concentration than in M. hyopneumoniae, which makes e.coli more polar protein sequence.
+When comparing E.coli protein sequence with the M. hyopneumoniae protein sequence, the alanine concentration (eff) is higher in E.coli as well as the valine concentration is also higher in E.coli than the M. hyopneumoniae, which makes the E.coli is more hydrophobic than the M. hyopneumoniae.
 
-Amino acids such as tyrosine and phenylalanine are considered as aromatic amino acids. They are able to absorb ultraviolet light. E.coli has more tyrosine concentration than in M. hyopneumoniae, which makes E.coli more aromatic.
+Amino acids such as serine, threonine and glutamine are considered as polar amino acids.
 
+In E.coli protein, serine has more concentration than in M. hyopneumoniae, which makes e.coli more polar protein sequence.
 
+Amino acids such as tyrosine and phenylalanine are considered as aromatic amino acids.
+
+They are able to absorb ultraviolet light. E.coli has more tyrosine concentration than in M. hyopneumoniae, which makes E.coli more aromatic.
 
 **5. In the organism of interest, identify 10 protein sequence k-mers of length 3-5 which are the most over- and under-represented k-mers in your organism of interest.**
+
+In question 3, the `lapply` function and the `unlist` function were used to create the variable `prot_seq` for each organism.
+
+This can be inserted into the `count()` function once more, using `wordsize=3` opposed to `wordsize=1` to gather three characters from the sequence.
+
+Once again, `str()` can be used to observe the structure and `head()` to display the first six k-mers.
+
+By adding `freq=TRUE` to the `count` function, redefining it as a new variable and inserting that variable into the `sort` function the frequency of the k-mers can be sorted.
+
+Applying the `head()` function to the sorted variable using `n = 10L` will select the first ten k-mers.
+
+While applying the `tail()` function will choose the last ten k-mers.
+
+This can then be used for `wordsize=4` and `wordsize=5` to determine the other two lengths.
 
 Calculate protein sequence k-mers for the organism of interest *M. hyopneumoniae*.
 
 ```{r mhp k-mers}
-mycounts_mhp <- count(prot_seq_mhp,wordsize=3,alphabet=aa_m)
-
-str(mycounts_mhp)
-
-head(mycounts_mhp)
+myfreq_mhp <- count(prot_seq_mhp,wordsize=3,alphabet=aa_m,freq=TRUE) # count protein sequence k-mer of length 3 for m. hyopneumoniae
 ```
 
 The most under-represented protein sequence k-mers for *M. hyopneumoniae*.
 
 ```{r mhp k-mers under}
-myfreq_mhp <- count(prot_seq_mhp,wordsize=3,alphabet=aa_m,freq=TRUE)
+sorted_mhp <- sort(myfreq_mhp) # sort them
 
-sorted_mhp <- sort(myfreq_mhp)
-
-head(sorted_mhp, n = 10L)
+head(sorted_mhp, n = 10L) # display the first ten
 ```
 
 The most over-represented protein sequence k-mers for *M. hyopneumoniae*.
 
 ```{r mhp k-mers over}
-tail(sorted_mhp, n = 10L)
+tail(sorted_mhp, n = 10L) # display the last ten
 ```
 
 Calculate protein sequence k-mers for *E. coli*.
 
 ```{r e.coli k-mers}
-mycounts_ecoli <- count(prot_seq_ecoli,wordsize=3,alphabet=aa_e)
-
-str(mycounts_ecoli)
-
-head(mycounts_ecoli)
+myfreq_ecoli <- count(prot_seq_ecoli,wordsize=3,alphabet=aa_e,freq=TRUE) # count protein sequence k-mer of length 3 for e. coli
 ```
 
 The most under-represented protein sequence k-mers for *E. coli*.
 
 ```{r e.coli k-mers under}
-myfreq_ecoli <- count(prot_seq_ecoli,wordsize=3,alphabet=aa_e,freq=TRUE)
+sorted_ecoli <- sort(myfreq_ecoli) # sort them
 
-sorted_ecoli <- sort(myfreq_ecoli)
-
-head(sorted_ecoli, n = 10L)
+head(sorted_ecoli, n = 10L) # display the first ten
 ```
 
 The most over-represented protein sequence k-mers for *E. coli*.
 
 ```{r e.coli k-mers over}
-tail(sorted_ecoli, n = 10L)
+tail(sorted_ecoli, n = 10L) # display the last ten
 ```
 
 **5. Provide plots to support your observations.**
@@ -422,13 +428,13 @@ tail(sorted_ecoli, n = 10L)
 Define variables for each organism.
 
 ```{r plot variables}
-under_mhp <- head(sorted_mhp, n = 10L)
+under_mhp <- head(sorted_mhp, n = 10L) # under-represented m. hyopneumoniae k-mers of length 3
 
-over_mhp <- tail(sorted_mhp, n = 10L)
+over_mhp <- tail(sorted_mhp, n = 10L) # over-represented m. hyopneumoniae k-mers of length 3
 
-under_e.coli <- head(sorted_ecoli, n = 10L)
+under_e.coli <- head(sorted_ecoli, n = 10L) # under-represented e. coli k-mers of length 3
 
-over_e.coli <- tail(sorted_ecoli, n = 10L)
+over_e.coli <- tail(sorted_ecoli, n = 10L) # over-represented e. coli k-mers of length 3
 ```
 
 Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
@@ -436,7 +442,8 @@ Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp under plot}
 barplot(under_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers")
+        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -446,7 +453,8 @@ Create a plot for the over-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp over plot}
 barplot(over_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers")
+        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -456,7 +464,8 @@ Create a plot for the under-represented k-mers in *E. coli*.
 ```{r e.coli under plot}
 barplot(under_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Under-represented K-mers")
+        ylab="Frequency", main="E. coli Under-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -466,7 +475,8 @@ Create a plot for the over-represented k-mers in *E. coli*.
 ```{r e.coli over plot}
 barplot(over_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Over-represented K-mers")
+        ylab="Frequency", main="E. coli Over-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -476,53 +486,41 @@ grid()
 Calculate protein sequence k-mers for the organism of interest *M. hyopneumoniae*.
 
 ```{r mhp 4 k-mers}
-mycounts_4_mhp <- count(prot_seq_mhp,wordsize=4,alphabet=aa_m)
-
-str(mycounts_4_mhp)
-
-head(mycounts_4_mhp)
+myfreq_4_mhp <- count(prot_seq_mhp,wordsize=4,alphabet=aa_m,freq=TRUE) # count protein sequence k-mer of length 4 for m. hyopneumoniae
 ```
 
 The most under-represented protein sequence k-mers for *M. hyopneumoniae*.
 
 ```{r mhp 4 k-mers under}
-myfreq_4_mhp <- count(prot_seq_mhp,wordsize=4,alphabet=aa_m,freq=TRUE)
+sorted_4_mhp <- sort(myfreq_4_mhp) # sort them
 
-sorted_4_mhp <- sort(myfreq_4_mhp)
-
-head(sorted_4_mhp, n = 10L)
+head(sorted_4_mhp, n = 10L) # display the first ten
 ```
 
 The most over-represented protein sequence k-mers for *M. hyopneumoniae*.
 
 ```{r mhp 4 k-mers over}
-tail(sorted_4_mhp, n = 10L)
+tail(sorted_4_mhp, n = 10L) # display the last ten
 ```
 
 Calculate protein sequence k-mers for *E. coli*.
 
 ```{r e.coli 4 k-mers}
-mycounts_4_ecoli <- count(prot_seq_ecoli,wordsize=4,alphabet=aa_e)
-
-str(mycounts_4_ecoli)
-
-head(mycounts_4_ecoli)
+myfreq_4_ecoli <- count(prot_seq_ecoli,wordsize=4,alphabet=aa_e,freq=TRUE) # count protein sequence k-mer of length 4 for e. coli
 ```
 
 The most under-represented protein sequence k-mers for *E. coli*.
 
 ```{r e.coli 4 k-mers under}
-myfreq_4_ecoli <- count(prot_seq_ecoli,wordsize=4,alphabet=aa_e,freq=TRUE)
+sorted_4_ecoli <- sort(myfreq_4_ecoli) # sort them
 
-sorted_4_ecoli <- sort(myfreq_4_ecoli)
-
-head(sorted_4_ecoli, n = 10L)
+head(sorted_4_ecoli, n = 10L) # display the first ten
 ```
 
 The most over-represented protein sequence k-mers for *E. coli*.
 
 ```{r e.coli 4 k-mers over}
-tail(sorted_4_ecoli, n = 10L)
+tail(sorted_4_ecoli, n = 10L) # display the last ten
 ```
 
 **5. Provide plots to support your observations.**
@@ -530,13 +528,13 @@ tail(sorted_4_ecoli, n = 10L)
 Define variables for each organism.
 
 ```{r plot 4 variables}
-under_4_mhp <- head(sorted_4_mhp, n = 10L)
+under_4_mhp <- head(sorted_4_mhp, n = 10L) # under-represented m. hyopneumoniae k-mers of length 4
 
-over_4_mhp <- tail(sorted_4_mhp, n = 10L)
+over_4_mhp <- tail(sorted_4_mhp, n = 10L) # over-represented m. hyopneumoniae k-mers of length 4
 
-under_4_e.coli <- head(sorted_4_ecoli, n = 10L)
+under_4_e.coli <- head(sorted_4_ecoli, n = 10L) # under-represented e. coli k-mers of length 4
 
-over_4_e.coli <- tail(sorted_4_ecoli, n = 10L)
+over_4_e.coli <- tail(sorted_4_ecoli, n = 10L) # over-represented e. coli k-mers of length 4
 ```
 
 Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
@@ -544,7 +542,8 @@ Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp 4 under plot}
 barplot(under_4_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers")
+        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -554,7 +553,8 @@ Create a plot for the over-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp 4 over plot}
 barplot(over_4_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers")
+        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -564,7 +564,8 @@ Create a plot for the under-represented k-mers in *E. coli*.
 ```{r e.coli 4 under plot}
 barplot(under_4_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Under-represented K-mers")
+        ylab="Frequency", main="E. coli Under-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -574,7 +575,8 @@ Create a plot for the over-represented k-mers in *E. coli*.
 ```{r e.coli 4 over plot}
 barplot(over_4_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Over-represented K-mers")
+        ylab="Frequency", main="E. coli Over-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -584,49 +586,41 @@ grid()
 Calculate protein sequence k-mers for the organism of interest *M. hyopneumoniae*.
 
 ```{r mhp 5 k-mers}
-mycounts_5_mhp <- count(prot_seq_mhp,wordsize=5,alphabet=aa_m)
-
-head(mycounts_5_mhp)
+myfreq_5_mhp <- count(prot_seq_mhp,wordsize=5,alphabet=aa_m,freq=TRUE) # count protein sequence k-mer of length 5 for m. hyopneumoniae
 ```
 
 The most under-represented protein sequence k-mers for *M. hyopneumoniae*.
 
 ```{r mhp 5 k-mers under}
-myfreq_5_mhp <- count(prot_seq_mhp,wordsize=5,alphabet=aa_m,freq=TRUE)
+sorted_5_mhp <- sort(myfreq_5_mhp) # sort them
 
-sorted_5_mhp <- sort(myfreq_5_mhp)
-
-head(sorted_5_mhp, n = 10L)
+head(sorted_5_mhp, n = 10L) # display the first ten
 ```
 
 The most over-represented protein sequence k-mers for *M. hyopneumoniae*.
 
 ```{r mhp 5 k-mers over}
-tail(sorted_5_mhp, n = 10L)
+tail(sorted_5_mhp, n = 10L) # display the last ten
 ```
 
 Calculate protein sequence k-mers for *E. coli*.
 
 ```{r e.coli 5 k-mers}
-mycounts_5_ecoli <- count(prot_seq_ecoli,wordsize=5,alphabet=aa_e)
-
-head(mycounts_5_ecoli)
+myfreq_5_ecoli <- count(prot_seq_ecoli,wordsize=5,alphabet=aa_e,freq=TRUE) # count protein sequence k-mer of length 5 for e. coli
 ```
 
 The most under-represented protein sequence k-mers for *E. coli*.
 
 ```{r e.coli 5 k-mers under}
-myfreq_5_ecoli <- count(prot_seq_ecoli,wordsize=5,alphabet=aa_e,freq=TRUE)
+sorted_5_ecoli <- sort(myfreq_5_ecoli) # sort them
 
-sorted_5_ecoli <- sort(myfreq_5_ecoli)
-
-head(sorted_5_ecoli, n = 10L)
+head(sorted_5_ecoli, n = 10L) # display the first ten
 ```
 
 The most over-represented protein sequence k-mers for *E. coli*.
 
 ```{r e.coli 5 k-mers over}
-tail(sorted_5_ecoli, n = 10L)
+tail(sorted_5_ecoli, n = 10L) # display the last ten
 ```
 
 **5. Provide plots to support your observations.**
@@ -634,13 +628,13 @@ tail(sorted_5_ecoli, n = 10L)
 Define variables for each organism.
 
 ```{r plot 5 variables}
-under_5_mhp <- head(sorted_5_mhp, n = 10L)
+under_5_mhp <- head(sorted_5_mhp, n = 10L) # under-represented m. hyopneumoniae k-mers of length 5
 
-over_5_mhp <- tail(sorted_5_mhp, n = 10L)
+over_5_mhp <- tail(sorted_5_mhp, n = 10L) # over-represented m. hyopneumoniae k-mers of length 5
 
-under_5_e.coli <- head(sorted_5_ecoli, n = 10L)
+under_5_e.coli <- head(sorted_5_ecoli, n = 10L) # under-represented e. coli k-mers of length 5
 
-over_5_e.coli <- tail(sorted_5_ecoli, n = 10L)
+over_5_e.coli <- tail(sorted_5_ecoli, n = 10L) # over-represented e. coli k-mers of length 5
 ```
 
 Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
@@ -648,7 +642,8 @@ Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp 5 under plot}
 barplot(under_5_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers")
+        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -658,7 +653,8 @@ Create a plot for the over-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp 5 over plot}
 barplot(over_5_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers")
+        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -668,7 +664,8 @@ Create a plot for the under-represented k-mers in *E. coli*.
 ```{r e.coli 5 under plot}
 barplot(under_5_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Under-represented K-mers")
+        ylab="Frequency", main="E. coli Under-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
@@ -678,7 +675,16 @@ Create a plot for the over-represented k-mers in *E. coli*.
 ```{r e.coli 5 over plot}
 barplot(over_5_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Over-represented K-mers")
+        ylab="Frequency", main="E. coli Over-represented K-mers",
+        cex.names=0.5)
 
 grid()
 ```
+
+**5. Are these k-mers also over- and under-represented in E. coli to a similar extent?**
+
+**5. Why do you think these sequences are present at different levels in the genomes of these organisms?**
+
+**###References**
+
+Ziemann M (16 May 2022) '[Bioinformatics prac 5: working with sequence data in R](https://raw.githubusercontent.com/markziemann/SLE712_files/master/BioinfoPrac5.Rmd)', *GitHub*, accessed 28 May 2022.
