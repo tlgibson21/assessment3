@@ -263,6 +263,4 @@ res <- wilcox.test(growth_rate_site1,growth_rate_site2)
 p.value2 <- res$p.value
 
 paste("P Value from Wilcox Test:" , signif(p.value2,3))
-
-###fkfdmbkfb
 ```
