@@ -51,8 +51,7 @@ dt1 <- head(gene_exp) # show the first part
 
 dt1 %>%
   kbl(caption = "Table 1: Gene Expression Data Table") %>%
-  kable_styling(full_width = F, html_font = "Arial")
-  # create kableExtra table
+  kable_styling(full_width = F, html_font = "Arial") # create kableExtra table
 ```
 
 **2. Make a new column which is the mean of the other columns. Show a table of values for the first six genes.**
@@ -70,8 +69,7 @@ dt2 <- head(gene_exp) # show the first six genes
 
 dt2 %>%
   kbl(caption = "Table 2: Gene Expression Mean Data") %>%
-  kable_styling(full_width = F, html_font = "Arial")
-  # create kableExtra table
+  kable_styling(full_width = F, html_font = "Arial") # create kableExtra table
 ```
 
 **3. List the 10 genes with the highest mean expression.**
@@ -95,8 +93,7 @@ dt3 <- rownames(list) # define the row names
 
 dt3 %>%
   kbl(caption = "Table 3: Genes with the Highest Mean Expression") %>%
-  kable_styling(full_width = F, html_font = "Arial")
-  # create kableExtra table
+  kable_styling(full_width = F, html_font = "Arial") # create kableExtra table
 ```
 
 **4. Determine the number of genes with a mean < 10**
@@ -165,7 +162,9 @@ colnames(growth_d, do.NULL = TRUE, prefix = "col")
 
 **7. Calculate the mean and standard deviation of tree circumference at the start and end of the study at both sites.**
 
-To solve this problem, I subset the each site `site1 <- subset(growth_d,Site == "northeast")` and `site2 <- subset(growth_d,Site == "southwest")`. To find the mean and standard deviation in northeast site,  I added  `start_site1 <- site1$Circumf_2005_cm` then`mean(start_site1)` and `sd(start_site1)` and will be repeated for the southwest site.
+To solve this problem, I subset the each site `site1 <- subset(growth_d,Site == "northeast")` and `site2 <- subset(growth_d,Site == "southwest")`.
+
+To find the mean and standard deviation in northeast site, I added `start_site1 <- site1$Circumf_2005_cm` then`mean(start_site1)` and `sd(start_site1)` and will be repeated for the southwest site.
 
 ```{r mean and sd}
 # Subset each site
@@ -226,7 +225,9 @@ grid()
 
 **9. Calculate the mean growth over the last 10 years at each site.**
 
-To solve this problem, I subset each site separately using `mid_site1 <- site1$Circumf_2010_cm` and `mid_site2 <- site2$Circumf_2010_cm`. Then I added the coding for growth rate for each site using `growth_rate_site1 <- ((end_site1-mid_site1)/mid_site1)` and `growth_rate_site2 <- ((end_site2-mid_site2)/mid_site2)`
+To solve this problem, I subset each site separately using `mid_site1 <- site1$Circumf_2010_cm` and `mid_site2 <- site2$Circumf_2010_cm`.
+
+Then, I added the coding for growth rate for each site using `growth_rate_site1 <- ((end_site1-mid_site1)/mid_site1)` and `growth_rate_site2 <- ((end_site2-mid_site2)/mid_site2)`
 
 ```{r Mean for the last 10 years}
 # How to calculate the mean growth over the last 10 years
@@ -246,17 +247,20 @@ mean_growth <- mean(growth_rate_site1+growth_rate_site2)
 
 **10. Use the t.test and wilcox.test functions to estimate the p-value that the 10 year growth is different at the two sites.**
 
-To solve this problem, I added a function `res <- t.test (growth_rate_site1,growth_rate_site2)` and then `p.value <- res$p.value` to find the p value. To round the number into 3 digits I added `HEADER <- paste("P Value:" , signif(p.value,3))`.
+To solve this problem, I added a function `res <- t.test (growth_rate_site1,growth_rate_site2)` and then `p.value <- res$p.value` to find the p value.
+
+To round the number into 3 digits I added `HEADER <- paste("P Value:" , signif(p.value,3))`.
 
 ```{r t test}
-
 res <- t.test (growth_rate_site1,growth_rate_site2)
+
 p.value <- res$p.value
-t.test(growth_rate_site1,growth_rate_site2)
-HEADER <- paste("P Value:" , signif(p.value,3))
+
+paste("P Value from T Test:" , signif(p.value,3))
 
 res <- wilcox.test(growth_rate_site1,growth_rate_site2)
-p.value <- res$p.value
-wilcox.test(growth_rate_site1,growth_rate_site2)
-HEADER <- paste("P Value:" , signif(p.value,3))
+
+p.value2 <- res$p.value
+
+paste("P Value from Wilcox Test:" , signif(p.value2,3))
 ```
