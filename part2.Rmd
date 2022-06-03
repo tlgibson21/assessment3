@@ -323,34 +323,14 @@ codon_usage_m %>%
   kable_paper("hover", full_width = F, html_font = "Arial")
 ```
 
-Plot a codon usage bias chart.
+Plot codon usage bias charts.
 
 ```{r codon usage bias}
-plot(codon_usage_e,codon_usage_m,
-     main="Codon Usage Bias E.coli compared with M. hyopneumoniae")
-```
+plot(codon_usage_e,
+     main="Codon Usage Bias of E.coli") # chart for e. coli
 
-## NEW code for question 4
-```{r codon usage for e.coli}
-uco(ecoli[[2]])
-codon_usage_e <- uco(ecoli[[2]],index = "rscu",as.data.frame = TRUE)
-
-codon_usage_e
-codon_usage_e%>%
-kbl()%>%
-  kable_paper(full_width = F, html_font = "AArial")
-plot(codon_usage_e)
-
-```
-
-```{r codon usage for hyopneumoniae }
-uco(mhp[[2]])
-codon_usage_m <- uco(mhp[[2]],index = "rscu",as.data.frame = TRUE)
-codon_usage_m
-codon_usage_m%>%
-  kbl()%>%
-   kable_paper(full_width = F, html_font = "AArial")
-plot(codon_usage_m)
+plot(codon_usage_m,
+     main="Codon Usage Bias of M. hyopneumoniae") # chart for m. hyopneumoniae
 ```
 
 **4. Describe any differences between the two organisms with respect to their codon usage bias.**
@@ -373,8 +353,6 @@ In question 3, the `lapply` function and the `unlist` function were used to crea
 
 This can be inserted into the `count()` function once more, using `wordsize=3` opposed to `wordsize=1` to gather three characters from the sequence.
 
-Once again, `str()` can be used to observe the structure and `head()` to display the first six k-mers.
-
 By adding `freq=TRUE` to the `count` function, redefining it as a new variable and inserting that variable into the `sort` function the frequency of the k-mers can be sorted.
 
 Applying the `head()` function to the sorted variable using `n = 10L` will select the first ten k-mers.
@@ -382,6 +360,8 @@ Applying the `head()` function to the sorted variable using `n = 10L` will selec
 While applying the `tail()` function will choose the last ten k-mers.
 
 This can then be used for `wordsize=4` and `wordsize=5` to determine the other two lengths.
+
+When plotting the subsequent bar plots, `cex.names=0.5` was used to minimise the font size of the bar labels in the x-axis.
 
 Calculate protein sequence k-mers for the organism of interest *M. hyopneumoniae*.
 
@@ -689,6 +669,10 @@ The k-mers 'LDEPT' and 'GKSTL' are over-represented in both organisms of length 
 
 **5. Why do you think these sequences are present at different levels in the genomes of these organisms?**
 
+The different levels of these peptide sequences are most likely due to evolutionary diversity between the two organisms. For instance, k-mer lengths can be an indication of phylogenetic distances (Röhling et al. 2020), which can estimate the time frame that each organism has evolved independently of the other.
+
 **References**
+
+Röhling S, Linne A, Schellhorn J, Hosseini M, Dencker T and Morgenstern B (2020) ‘The number of k-mer matches between two DNA sequences as a function of k and applications to estimate phylogenetic distances’, *PloS ONE*, 15(2):1–18, doi:10.1371/journal.pone.0228070
 
 Ziemann M (16 May 2022) '[Bioinformatics prac 5: working with sequence data in R](https://raw.githubusercontent.com/markziemann/SLE712_files/master/BioinfoPrac5.Rmd)', *GitHub*, accessed 28 May 2022.
