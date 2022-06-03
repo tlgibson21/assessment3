@@ -442,7 +442,7 @@ Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp under plot}
 barplot(under_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers of Length 3",
         cex.names=0.5)
 
 grid()
@@ -453,7 +453,7 @@ Create a plot for the over-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp over plot}
 barplot(over_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers of Length 3",
         cex.names=0.5)
 
 grid()
@@ -464,7 +464,7 @@ Create a plot for the under-represented k-mers in *E. coli*.
 ```{r e.coli under plot}
 barplot(under_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Under-represented K-mers",
+        ylab="Frequency", main="E. coli Under-represented K-mers of Length 3",
         cex.names=0.5)
 
 grid()
@@ -475,7 +475,7 @@ Create a plot for the over-represented k-mers in *E. coli*.
 ```{r e.coli over plot}
 barplot(over_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Over-represented K-mers",
+        ylab="Frequency", main="E. coli Over-represented K-mers of Length 3",
         cex.names=0.5)
 
 grid()
@@ -542,7 +542,7 @@ Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp 4 under plot}
 barplot(under_4_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers of Length 4",
         cex.names=0.5)
 
 grid()
@@ -553,7 +553,7 @@ Create a plot for the over-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp 4 over plot}
 barplot(over_4_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers of Length 4",
         cex.names=0.5)
 
 grid()
@@ -564,7 +564,7 @@ Create a plot for the under-represented k-mers in *E. coli*.
 ```{r e.coli 4 under plot}
 barplot(under_4_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Under-represented K-mers",
+        ylab="Frequency", main="E. coli Under-represented K-mers of Length 4",
         cex.names=0.5)
 
 grid()
@@ -575,7 +575,7 @@ Create a plot for the over-represented k-mers in *E. coli*.
 ```{r e.coli 4 over plot}
 barplot(over_4_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Over-represented K-mers",
+        ylab="Frequency", main="E. coli Over-represented K-mers of Length 4",
         cex.names=0.5)
 
 grid()
@@ -642,7 +642,7 @@ Create a plot for the under-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp 5 under plot}
 barplot(under_5_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Under-represented K-mers of Length 5",
         cex.names=0.5)
 
 grid()
@@ -653,7 +653,7 @@ Create a plot for the over-represented k-mers in *M. hyopneumoniae*.
 ```{r mhp 5 over plot}
 barplot(over_5_mhp,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers",
+        ylab="Frequency", main="M. hyopneumoniae Over-represented K-mers of Length 5",
         cex.names=0.5)
 
 grid()
@@ -664,7 +664,7 @@ Create a plot for the under-represented k-mers in *E. coli*.
 ```{r e.coli 5 under plot}
 barplot(under_5_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Under-represented K-mers",
+        ylab="Frequency", main="E. coli Under-represented K-mers of Length 5",
         cex.names=0.5)
 
 grid()
@@ -675,7 +675,7 @@ Create a plot for the over-represented k-mers in *E. coli*.
 ```{r e.coli 5 over plot}
 barplot(over_5_e.coli,
         xlab="Protein Sequence K-mers",
-        ylab="Frequency", main="E. coli Over-represented K-mers",
+        ylab="Frequency", main="E. coli Over-represented K-mers of Length 5",
         cex.names=0.5)
 
 grid()
@@ -683,8 +683,12 @@ grid()
 
 **5. Are these k-mers also over- and under-represented in E. coli to a similar extent?**
 
+There are no similarities between the over- and under-represented k-mers in each organism of length 3 and 4.
+
+The k-mers 'LDEPT' and 'GKSTL' are over-represented in both organisms of length 5. The k-mer 'AAAAC' is under-represented in both organisms of length 5.
+
 **5. Why do you think these sequences are present at different levels in the genomes of these organisms?**
 
-**###References**
+**References**
 
 Ziemann M (16 May 2022) '[Bioinformatics prac 5: working with sequence data in R](https://raw.githubusercontent.com/markziemann/SLE712_files/master/BioinfoPrac5.Rmd)', *GitHub*, accessed 28 May 2022.
