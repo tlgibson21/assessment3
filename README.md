@@ -16,4 +16,4 @@ This part will demonstrate how to download and unzip sequence files, analyse the
 
 ## How to run the programs?
 
-The RMarkdown files can be run using RStudio. It may help to have the [*E.coli*](http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cdna/) and [*M. hyopneumoniae*](http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_40_collection/mycoplasma_hyopneumoniae_gca_004768725/cdna/) cds files downloaded on your desktop using the links provided from [Ensembl Bacteria](https://bacteria.ensembl.org/index.html).
+The RMarkdown files can be run using RStudio. It may help to have the [*E.coli*](http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_0_collection/escherichia_coli_str_k_12_substr_mg1655_gca_000005845/cdna/) and [*M. hyopneumoniae*](http://ftp.ensemblgenomes.org/pub/release-53/bacteria//fasta/bacteria_40_collection/mycoplasma_hyopneumoniae_gca_004768725/cdna/) cDNA sequence files downloaded on your desktop using the links provided from [Ensembl Bacteria](https://bacteria.ensembl.org/index.html).
